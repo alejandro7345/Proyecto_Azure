@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package instrumento;
+
+option go_package = "instrumentos/proto;proto";
+
+
+service InstrumentService {
+  rpc GetInstrumentinfo (InstrumentRequest) returns (InstrumentResponse);
+  rpc GetInstrumentList(Empty) returns(stream InstrumentResponse);
+  rpc AddInstrumentos( stream NewInstrumentRequest ) returns(AddInstrumentResponse);
+  rpc GetInstrumentosByType(stream InstrumentTypeRequest) returns(stream InstrumentResponse);
+}
+
+message InstrumentRequest {
+string name = 1;
+}
+
+message InstrumentResponse {
+  string name = 1;
+  string type = 2;
+  string origin = 3;
+}
+
+message NewInstrumentRequest {
+  string name = 1;
+  string type = 2;
+  string origin = 3;
+}
+message AddInstrumentResponse {
+    int32 count =1;
+}
+message  Empty {}
+message  InstrumentTypeRequest {
+    string type=1;
+}
+
